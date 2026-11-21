@@ -1,0 +1,29 @@
+{
+  "data": "2026-11-26",
+  "hora": "18:00",
+  "formato": "carrossel",
+  "publico": "profissionais",
+  "tema": "Temporário de fim de ano: como virar efetivação",
+  "artes_prontas": true,
+  "observacao": "Cards aprovados no canvas de 19/11/2026; JPEGs enviados prontos.",
+  "legenda": "Temporário não precisa acabar em janeiro.\n\nA ASSERTTEM prevê cerca de 530 mil contratos temporários até dezembro, e estima que perto de 20% dos temporários são efetivados. A efetivação não é automática, mas também não é sorte: ela se decide durante o contrato.\n\nUma coisa que pouca gente sabe: a lei do trabalho temporário considera nula qualquer cláusula que impeça a empresa de contratar você ao fim do contrato. A porta existe. O que leva até ela está no carrossel.\n\nAntes de tudo, confira o seu contrato. Se o empregador na Carteira de Trabalho Digital for uma agência, você é temporário pela Lei 6.019. Se for a própria loja, é outro tipo de contrato, com outras regras.\n\nCompartilhe com quem está começando um temporário agora.",
+  "hashtags": "#trabalhotemporario #vagastemporarias #efetivacao #carreira #empregabilidade",
+  "fontes": [
+    {
+      "titulo": "Exame, 09/11/2026 (ASSERTTEM)",
+      "url": "https://exame.com/bussola/dezembro-deve-gerar-530-mil-vagas-temporarias-com-20-de-efetivacao/"
+    },
+    {
+      "titulo": "Viva, 09/11/2026 (ASSERTTEM)",
+      "url": "https://viva.com.br/carreira-e-educacao/conseguiu-um-trabalho-temporario-veja-como-se-destacar-e-ser-efetivado.html"
+    },
+    {
+      "titulo": "Lei 6.019/1974 atualizada",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/1970-1979/lei-6019-3-janeiro-1974-357401-normaatualizada-pl.html"
+    },
+    {
+      "titulo": "Cartilha do MTE sobre trabalho temporário",
+      "url": "https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/acoes-e-programas/proteja/arquivos/proteja-o-trabalho-_-o-que-e-trabalho-temporario.pdf"
+    }
+  ]
+}
