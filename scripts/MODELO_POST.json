@@ -1,0 +1,26 @@
+{
+  "data": "2026-11-26",
+  "hora": "18:00",
+  "formato": "carrossel",
+  "publico": "profissionais",
+  "tema": "Temporário de fim de ano: como virar efetivação",
+  "foto": {"busca": "shop assistant wrapping gift christmas store", "alt": "Vendedora amarrando uma fita dourada num presente vermelho no balcão de uma loja"},
+  "telas": [
+    {"tipo": "capa", "titulo": "Temporário não precisa *acabar* em janeiro.", "subtitulo": "O que a lei garante e o que depende de você para ser efetivado.", "posicao": "center"},
+    {"tipo": "numero", "num": "01", "titulo": "O tamanho da chance", "destaque": "≈ 2", "complemento": "em cada 10", "icones": {"total": 10, "cheios": 2}, "legenda": "Temporários efetivados · estimativa da ASSERTTEM", "texto": "Cerca de 20% dos temporários são efetivados. Para 2026, a previsão é de 530 mil contratos temporários até dezembro.", "acao": "Trate o contrato como o começo de um processo seletivo, não como um bico."},
+    {"tipo": "comparativo", "num": "02", "titulo": "Saiba qual é o seu contrato", "a": {"rotulo": "Temporário", "sub": "Lei 6.019", "itens": ["Contratado por uma agência", "Até 180 dias, prorrogáveis por mais 90"]}, "b": {"rotulo": "Prazo determinado", "sub": "CLT", "itens": ["Contratado direto pela empresa", "Até 2 anos"]}, "texto": "Prazos e direitos mudam conforme o tipo de contrato.", "acao": "Veja na Carteira de Trabalho Digital quem é o seu empregador."},
+    {"tipo": "esquema", "num": "03", "titulo": "A lei não fecha a porta", "nos": ["Agência", "Empresa", "Contratação direta"], "destaque": "Cláusula que proíba a contratação é nula", "texto": "Ao fim do contrato, a empresa pode contratar você. E, se isso acontecer, não cabe contrato de experiência.", "nota": "Lei 6.019/1974, art. 11, parágrafo único, e art. 10, § 4º."},
+    {"tipo": "linha_tempo", "num": "04", "titulo": "Do primeiro dia ao último", "passos": [{"quando": "Primeira semana", "texto": "Aprenda a rotina e as ferramentas."}, {"quando": "No pico de vendas", "texto": "Entregue sem retrabalho e ajude quem precisa."}, {"quando": "Metade do contrato", "texto": "Peça retorno ao gestor."}], "texto": "A efetivação se decide durante o contrato, não no último dia."},
+    {"tipo": "antes_depois", "num": "05", "titulo": "Diga que quer ficar", "antes": {"rotulo": "Esperar", "texto": "Ficar calado e torcer pelo convite."}, "depois": {"rotulo": "Agir", "texto": "Dizer ao gestor que quer continuar e perguntar o que falta."}, "texto": "O gestor nem sempre sabe quem quer ficar. E a efetivação não é automática.", "acao": "Fale com antecedência e siga atento a outras vagas."},
+    {"tipo": "fechamento", "titulo": "O temporário é uma entrevista de *semanas*.", "texto": "Na hora de efetivar, é lembrado quem mostrou resultado e disse que quer ficar.", "cta": "Compartilhe com quem está procurando.", "fontes": "ASSERTTEM, via Exame e Viva (nov/2026) · Lei 6.019/1974, arts. 10 e 11 · CLT, arts. 443 e 445."}
+  ],
+  "legenda": "Temporário não precisa acabar em janeiro.\n\nA ASSERTTEM prevê cerca de 530 mil contratos temporários até dezembro, e estima que perto de 20% dos temporários são efetivados. A efetivação não é automática, mas também não é sorte: ela se decide durante o contrato.\n\nUma coisa que pouca gente sabe: a lei do trabalho temporário considera nula qualquer cláusula que impeça a empresa de contratar você ao fim do contrato. A porta existe. O que leva até ela está no carrossel.\n\nAntes de tudo, confira o seu contrato. Se o empregador na Carteira de Trabalho Digital for uma agência, você é temporário pela Lei 6.019. Se for a própria loja, é outro tipo de contrato, com outras regras.\n\nCompartilhe com quem está começando um temporário agora.",
+  "hashtags": "#trabalhotemporario #vagastemporarias #efetivacao #carreira #empregabilidade",
+  "alt": "Capa: vendedora amarrando uma fita dourada num presente vermelho no balcão de uma loja.",
+  "fontes": [
+    {"titulo": "Exame, 09/11/2026 (ASSERTTEM)", "url": "https://exame.com/bussola/dezembro-deve-gerar-530-mil-vagas-temporarias-com-20-de-efetivacao/"},
+    {"titulo": "Viva, 09/11/2026 (ASSERTTEM)", "url": "https://viva.com.br/carreira-e-educacao/conseguiu-um-trabalho-temporario-veja-como-se-destacar-e-ser-efetivado.html"},
+    {"titulo": "Lei 6.019/1974 atualizada", "url": "https://www2.camara.leg.br/legin/fed/lei/1970-1979/lei-6019-3-janeiro-1974-357401-normaatualizada-pl.html"},
+    {"titulo": "Cartilha do MTE sobre trabalho temporário", "url": "https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/acoes-e-programas/proteja/arquivos/proteja-o-trabalho-_-o-que-e-trabalho-temporario.pdf"}
+  ]
+}
