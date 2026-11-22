@@ -5,6 +5,7 @@ Uso (no GitHub Actions):
   python3 scripts/publish.py                 # publica o post de hoje se já chegou a hora (15 min de tolerância)
   python3 scripts/publish.py --dia 2026-11-23 --agora   # força um dia específico, ignorando a hora
   python3 scripts/publish.py --refresh-token
+  (se gatilho/publicar.txt contiver a palavra "verificar", só testa o token e o Pages e não publica nada)
 
 Secrets/variáveis: IG_ACCESS_TOKEN, IG_USER_ID, PAGES_BASE (ex.: https://pedro-nascimento-line.github.io/luana-rh),
 IG_API_HOST opcional ("graph.instagram.com", padrão).
@@ -112,6 +113,24 @@ def publicar(dia, pasta, meta):
     log(dia, "carrossel" if len(urls) > 1 else "post", pub["id"], "ok")
 
 
+def verificar():
+    """Testa o token (lê o perfil) e o Pages (um card da pasta posts/), sem publicar nada."""
+    try:
+        d = api("GET", "me", fields="user_id,username")
+        ok_id = str(d.get("user_id", "")) == USER
+        log("-", "verificacao_token", str(d.get("username", "")), "ok" if ok_id else "id_diferente",
+            "" if ok_id else "IG_USER_ID não confere com o token")
+        print(f"token ok: @{d.get('username')} (IG_USER_ID confere: {ok_id})")
+    except Exception as e:
+        log("-", "verificacao_token", "", "falha", str(e)); print(f"token com problema: {e}")
+    cards = sorted((RAIZ / "posts").glob("*/card_01.jpg"))
+    if cards:
+        u = f"{BASE}/posts/{cards[0].parent.name}/card_01.jpg"
+        ok = url_ok(u, tentativas=2, intervalo=10)
+        log("-", "verificacao_pages", "", "ok" if ok else "falha", "" if ok else u)
+        print(f"Pages {'ok' if ok else 'falhou'}: {u}")
+
+
 def refresh_token():
     if HOST != "graph.instagram.com":
         print(TOKEN); return
@@ -131,7 +150,11 @@ def main():
     if a.refresh_token:
         return refresh_token()
     if not (TOKEN and USER and BASE):
+        log("-", "-", "", "falha", "faltam IG_ACCESS_TOKEN, IG_USER_ID ou PAGES_BASE")
         sys.exit("faltam IG_ACCESS_TOKEN, IG_USER_ID ou PAGES_BASE")
+    g = RAIZ / "gatilho/publicar.txt"
+    if g.exists() and "verificar" in g.read_text():
+        return verificar()
     pasta = RAIZ / "posts" / a.dia
     if not (pasta / "post.json").exists():
         print(f"sem post para {a.dia}"); return
