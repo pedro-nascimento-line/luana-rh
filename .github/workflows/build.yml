@@ -1,0 +1,68 @@
+name: Gerar artes do post
+
+# Dispara quando a tarefa de domingo grava um post.json novo ou alterado.
+on:
+  push:
+    paths:
+      - "posts/**/post.json"
+  workflow_dispatch:
+    inputs:
+      dia:
+        description: "Pasta do post (AAAA-MM-DD)"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Descobrir posts alterados
+        id: posts
+        run: |
+          if [ -n "${{ github.event.inputs.dia }}" ]; then
+            echo "dias=posts/${{ github.event.inputs.dia }}" >> $GITHUB_OUTPUT
+          else
+            dias=$(git diff --name-only HEAD~1 HEAD | grep -E '^posts/[0-9-]+/post.json$' | xargs -r -n1 dirname | sort -u | tr '\n' ' ')
+            echo "dias=$dias" >> $GITHUB_OUTPUT
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: |
+          pip install requests pillow numpy rapidocr_onnxruntime playwright
+          python -m playwright install --with-deps chromium
+          npm install --no-save @fontsource/outfit @fontsource/source-serif-4
+
+      - name: Buscar foto e renderizar
+        env:
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+        run: |
+          export FONTDIR="$PWD/node_modules/@fontsource"
+          for d in ${{ steps.posts.outputs.dias }}; do
+            if [ ! -f "$d/post.json" ]; then echo "== $d sem post.json - ignorando"; continue; fi
+            echo "== $d"
+            python scripts/foto.py "$d" || echo "foto falhou em $d (capa sai sem foto)"
+            python scripts/render.py "$d"
+          done
+
+      - name: Commit das artes
+        run: |
+          git config user.name "luana-rh-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add posts
+          git diff --cached --quiet || git commit -m "artes: ${{ steps.posts.outputs.dias }}"
+          git pull --rebase || true
+          git push

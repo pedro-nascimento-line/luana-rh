@@ -1,0 +1,53 @@
+name: Publicar no Instagram
+
+# Horários em UTC (Brasília = UTC-3). Os crons são reserva: o disparo principal é o commit em gatilho/
+# feito pelas tarefas agendadas do Cowork. O publish.py nunca publica a mesma peça duas vezes.
+on:
+  schedule:
+    - cron: "6 21 * * 1,2,4"   # 18:06 BRT seg, ter, qui — reserva (carrossel)
+    - cron: "6 15 * * 5"       # 12:06 BRT sex — reserva (mito ou verdade)
+    - cron: "36 22 * * 1-5"    # 19:36 BRT — reserva final do dia
+  push:
+    paths:
+      - "gatilho/**"
+  workflow_dispatch:
+    inputs:
+      dia:
+        description: "AAAA-MM-DD (vazio = hoje)"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Publicar
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          PAGES_BASE: ${{ vars.PAGES_BASE }}
+          IG_API_HOST: ${{ vars.IG_API_HOST }}
+        run: |
+          args=""
+          if [ -n "${{ github.event.inputs.dia }}" ]; then args="--dia ${{ github.event.inputs.dia }} --agora"; fi
+          python scripts/publish.py $args
+      - name: Gravar log e meta
+        if: always()
+        run: |
+          git config user.name "luana-rh-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git pull --rebase || true
+          git add log posts
+          git diff --cached --quiet || git commit -m "log: publicação $(date -u +%F\ %H:%M) UTC"
+          git push || true
